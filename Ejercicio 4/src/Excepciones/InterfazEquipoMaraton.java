@@ -40,7 +40,6 @@ public class InterfazEquipoMaraton extends JFrame {
             add(apellidosProgramadores[i]);
         }
 
-        // Botón
         crearEquipoButton = new JButton("Crear equipo");
         add(crearEquipoButton);
 
