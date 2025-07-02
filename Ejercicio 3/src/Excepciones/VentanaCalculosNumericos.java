@@ -2,39 +2,80 @@ package Excepciones;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class VentanaCalculosNumericos extends JFrame{
+public class VentanaCalculosNumericos extends JFrame {
 
     private JTextField campoNumero;
-    private JLabel muestraResultado;
-    private CalculosNumericos calculosNumericos;
+    private JButton botonRaiz, botonLn;
+    private JTextArea areaResultado;
 
-    public VentanaCalculosNumericos(){
-        calculosNumericos = new CalculosNumericos();
+    public VentanaCalculosNumericos() {
 
-        setTitle("Calculadora de logaritmo neperiano y raiz cuadrada");
-        setSize (500, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setTitle("Calculos Numéricos");
+        setSize(400, 250);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(null);
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4,1));
+        JLabel etiqueta = new JLabel("Ingrese un número: ");
+        etiqueta.setBounds(30, 20, 150, 25);
+        add(etiqueta);
 
         campoNumero = new JTextField();
-        panel.add(new JLabel("Ingrese un número: "));
-        panel.add(campoNumero);
+        campoNumero.setBounds(170, 20, 150, 25);
+        add(campoNumero);
 
-        JPanel panelBotones = new JPanel();
-        JButton botonLn = new JButton("Logaritmo Neperiano");
-        JButton botonRaiz = new JButton("Raíz Cuadrada");
+        botonRaiz = new JButton("Raíz Cuadrada");
+        botonRaiz.setBounds(30, 60, 140, 30);
+        add(botonRaiz);
 
-        panelBotones.add(botonLn);
-        panelBotones.add(botonRaiz);
-        panel.add(panelBotones);
+        botonLn = new JButton("Logaritmo Neperiano");
+        botonLn.setBounds(180, 60, 170, 30);
+        add(botonLn);
 
-        muestraResultado = new JLabel ("Resultado: ");
+        areaResultado = new JTextArea();
+        areaResultado.setBounds(30, 110, 320, 70);
+        areaResultado.setEditable(false);
+        add(areaResultado);
 
-        botonLn.addActionListener(e -> CalcularLogaritmoNeperiano());
+        botonRaiz.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                realizarCalculo("Raíz");
+            }
+        });
 
+        botonLn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                realizarCalculo("Logaritmo Neperiano");
+            }
+        });
     }
+
+    private void realizarCalculo(String tipo) {
+        try {
+            double valor = Double.parseDouble(campoNumero.getText());
+            String resultado;
+
+            if (tipo.equals("Raíz")) {
+                resultado = CalculosNumericos.CalcularRaizCuadrada(valor);
+            } else {
+                resultado = CalculosNumericos.CalcularLogaritmoNeperiano(valor);
+            }
+
+            areaResultado.setText(resultado);
+
+        } catch (NumberFormatException e) {
+            areaResultado.setText("Error: Ingrese un número válido");
+        }
+    }
+
+    public static void main(String[] args) {
+        VentanaCalculosNumericos ventana = new VentanaCalculosNumericos();
+        ventana.setVisible(true);
+    }
+
+
 }

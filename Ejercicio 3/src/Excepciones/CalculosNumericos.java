@@ -2,37 +2,37 @@ package Excepciones;
 import java.util.*;
 
 public class CalculosNumericos {
-    static void CalcularLogaritmoNeperiano(double valor){
+    public static String CalcularLogaritmoNeperiano(double valor){
         try{
             if (valor<0){
                 throw new ArithmeticException("El valor tiene que ser un número positivo.");
             }
             double resultado = Math.log(valor);
-            System.out.println("El resultado es: "+resultado);
+            return "Logaritmo neperiano: " + resultado;
         }catch (ArithmeticException e){
 
-            System.out.println("El valor tiene que ser un número positivo para calcular el logaritmo Neperiano.");
+            return "El valor tiene que ser un número positivo para calcular el logaritmo Neperiano.";
 
         }catch (InputMismatchException e){
 
-            System.out.println("El valor debe ser numérico para poder calcular el logaritmo Neperiano.");
+            return "El valor debe ser numérico para poder calcular el logaritmo Neperiano.";
         }
     }
 
-    static void CalcularRaizCuadrada(double valor){
+    public static String CalcularRaizCuadrada(double valor){
         try{
             if (valor<0){
                 throw new ArithmeticException("El valor ingresado debe ser un número no negativo.");
             }
             double resultado = Math.sqrt(valor);
-            System.out.println("El resultado es: "+resultado);
+            return "Raíz cuadrada: " + resultado;
         }catch (ArithmeticException e) {
 
-            System.out.println("El valor tiene que ser un número no negativo para calcular la raíz cuadrada.");
+            return "El valor tiene que ser un número no negativo para calcular la raíz cuadrada.";
 
         }catch (InputMismatchException e){
 
-            System.out.println("El valor ingresado debe ser numérico para poder calcular la raíz cuadrada.");
+            return "El valor ingresado debe ser numérico para poder calcular la raíz cuadrada.";
         }
     }
 
