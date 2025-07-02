@@ -76,6 +76,4 @@ public class VentanaCalculosNumericos extends JFrame {
         VentanaCalculosNumericos ventana = new VentanaCalculosNumericos();
         ventana.setVisible(true);
     }
-
-
 }
